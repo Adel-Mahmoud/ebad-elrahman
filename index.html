@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مجزر الطيور عباد الرحمن - تطبيق الطلب والبيع</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #c62828;
+            --secondary-color: #ff9800;
+            --dark-color: #333;
+            --light-color: #f9f9f9;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        /* تحسينات عامة للنص العربي */
+        .ar-text {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            text-align: right;
+        }
+
+        /* ترويسة الصفحة */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #8b0000);
+            color: white;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 80px;
+            right: 0;
+            background-color: white;
+            width: 100%;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+        }
+
+        /* قسم البطل */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4rem 5%;
+            background-color: white;
+            min-height: 80vh;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-left: 2rem;
+        }
+
+        .hero-content h2 {
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            max-height: 500px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        /* زر تحميل التطبيق */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(198, 40, 40, 0.3);
+            margin-top: 10px;
+        }
+
+        .download-btn:hover {
+            background-color: #a71c1c;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(198, 40, 40, 0.4);
+        }
+
+        .download-btn i {
+            margin-left: 10px;
+            font-size: 1.5rem;
+        }
+
+        /* قسم الميزات */
+        .features {
+            padding: 5rem 5%;
+            background-color: var(--light-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        /* قسم المنتجات */
+        .products {
+            padding: 5rem 5%;
+            background-color: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: scale(1.03);
+        }
+
+        .product-img {
+            height: 200px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--primary-color);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            background-color: white;
+        }
+
+        .product-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        /* قسم تحميل التطبيق */
+        .download-section {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, var(--primary-color), #8b0000);
+            color: white;
+            text-align: center;
+        }
+
+        .download-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .download-section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+        }
+
+        .download-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .app-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .app-icon {
+            font-size: 5rem;
+            color: white;
+        }
+
+        .app-details h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* تذييل الصفحة */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 5% 1.5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .footer-section p, .footer-section ul {
+            opacity: 0.8;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section ul li i {
+            margin-left: 8px;
+            color: var(--secondary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+
+        /* وسائط الاستجابة */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-content {
+                padding-left: 0;
+                margin-bottom: 3rem;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .mobile-menu {
+                display: none;
+                position: fixed;
+                top: 80px;
+                right: 0;
+                background-color: white;
+                width: 100%;
+                box-shadow: var(--shadow);
+                z-index: 1000;
+            }
+            
+            .mobile-menu.active {
+                display: block;
+            }
+            
+            .mobile-menu ul {
+                list-style: none;
+            }
+            
+            .mobile-menu ul li {
+                border-bottom: 1px solid #eee;
+            }
+            
+            .mobile-menu ul li a {
+                display: block;
+                padding: 15px 20px;
+                color: var(--dark-color);
+                text-decoration: none;
+                transition: background-color 0.3s;
+            }
+            
+            .mobile-menu ul li a:hover {
+                background-color: #f5f5f5;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h2 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .download-box {
+                padding: 2rem 1.5rem;
+            }
+            
+            .app-info {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ترويسة الصفحة -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-drumstick-bite"></i>
+            <div class="logo-text">
+                <h1>مجزر الطيور عباد الرحمن</h1>
+                <p>تطبيق الطلب والبيع المباشر</p>
+            </div>
+        </div>
+        
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#features">الميزات</a></li>
+                <li><a href="#products">المنتجات</a></li>
+                <li><a href="#download">تحميل التطبيق</a></li>
+            </ul>
+        </nav>
+        
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+    
+    <!-- القائمة المتنقلة للهواتف -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#home">الرئيسية</a></li>
+            <li><a href="#features">الميزات</a></li>
+            <li><a href="#products">المنتجات</a></li>
+            <li><a href="#download">تحميل التطبيق</a></li>
+        </ul>
+    </div>
+    
+    <!-- قسم البطل الرئيسي -->
+    <section class="hero" id="home">
+        <div class="hero-content ar-text">
+            <h2>اطلب طيورك الطازجة بكل سهولة</h2>
+            <p>تطبيق عباد الرحمن يوفر لك أفضل أنواع الطيور الطازجة وأجزائها مع خدمة التوصيل السريع إلى منزلك. اطلب الآن واستمتع بجودة عالية وأسعار تنافسية.</p>
+            <a href="#download" class="download-btn">
+                <i class="fab fa-google-play"></i>
+                تحميل التطبيق الآن
+            </a>
+        </div>
+        <div class="hero-image">
+            <img src="./ebad-elrahman.png" alt="تطبيق مجزر الطيور عباد الرحمن">
+        </div>
+    </section>
+    
+    <!-- قسم الميزات -->
+    <section class="features" id="features">
+        <h2 class="section-title ar-text">مميزات تطبيقنا</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+                <h3>توصيل سريع</h3>
+                <p class="ar-text">خدمة توصيل سريعة لجميع أنواع الطيور وأجزائها خلال وقت قياسي.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3>جودة عالية</h3>
+                <p class="ar-text">طيور طازجة عالية الجودة، مختارة بعناية ومذبوحة بطريقة صحية.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>سهولة الطلب</h3>
+                <p class="ar-text">واجهة تطبيق بسيطة وسهلة الاستخدام لطلب المنتجات بخطوات بسيطة.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-tags"></i>
+                </div>
+                <h3>عروض مميزة</h3>
+                <p class="ar-text">خصومات وعروض حصرية للمستخدمين الدائمين على مختلف المنتجات.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- قسم المنتجات -->
+    <section class="products" id="products">
+        <h2 class="section-title ar-text">منتجاتنا المميزة</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-img">
+                    <i class="fas fa-drumstick-bite"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="ar-text">أفخاذ وأوراك الدجاج</h3>
+                    <p class="ar-text">أفخاذ وأوراك دجاج طازجة ومقطعة بأنواع مختلفة.</p>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-img">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="ar-text">شيش طاووق</h3>
+                    <p class="ar-text">قطع شيش طاووق جاهزة للشوي بنكهات مميزة.</p>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-img">
+                    <i class="fas fa-cheese"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="ar-text">صدور الدجاج</h3>
+                    <p class="ar-text">صدور دجاج طازجة بدون عظم بأنواع مختلفة.</p>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-img">
+                    <i class="fas fa-dove"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="ar-text">الحمام والبط</h3>
+                    <p class="ar-text">مجموعة متنوعة من الحمام والبط الطازج.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- قسم تحميل التطبيق -->
+    <section class="download-section" id="download">
+        <div class="download-box">
+            <h2>حمل تطبيق عباد الرحمن الآن</h2>
+            <p class="ar-text">اطلب جميع منتجاتنا بسهولة من خلال تطبيقنا المميز المتوفر على متجر جوجل بلاي</p>
+            
+            <div class="app-info">
+                <div class="app-icon">
+                    <i class="fas fa-drumstick-bite"></i>
+                </div>
+                <div class="app-details">
+                    <h3>مجزر الطيور عباد الرحمن</h3>
+                    <p class="ar-text">تطبيق الطلب والبيع المباشر للطيور وأجزائها</p>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>4.7 (ألف تقييم)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- رابط تحميل التطبيق -->
+            <a href="https://play.google.com/store/apps/details?id=com.alharamin.poultry" class="download-btn" id="downloadBtn" target="_blank">
+                <i class="fab fa-google-play"></i>
+                تحميل التطبيق من جوجل بلاي
+            </a>
+            
+            <p class="ar-text" style="margin-top: 20px; font-size: 0.9rem;">اضغط على الزر أعلاه لتحميل التطبيق مباشرة</p>
+        </div>
+    </section>
+    
+    <!-- تذييل الصفحة -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="ar-text">مجزر الطيور عباد الرحمن</h3>
+                <p class="ar-text">نوفر لكم أفضل أنواع الطيور الطازجة وأجزائها مع خدمة التوصيل السريع إلى منزلك.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="ar-text">روابط سريعة</h3>
+                <ul>
+                    <li><a href="#home"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
+                    <li><a href="#features"><i class="fas fa-chevron-left"></i> الميزات</a></li>
+                    <li><a href="#products"><i class="fas fa-chevron-left"></i> المنتجات</a></li>
+                    <li><a href="#download"><i class="fas fa-chevron-left"></i> تحميل التطبيق</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3 class="ar-text">اتصل بنا</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> العنوان: المدينة، الحي، الشارع</li>
+                    <li><i class="fas fa-phone"></i> الهاتف: ٠١٢٣٤٥٦٧٨٩</li>
+                    <li><i class="fas fa-envelope"></i> البريد: info@alharamin.com</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright ar-text">
+            <p>جميع الحقوق محفوظة &copy; ٢٠٢٣ مجزر الطيور عباد الرحمن</p>
+        </div>
+    </footer>
+    
+    <script>
+        // تفعيل القائمة المتنقلة
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        });
+        
+        // إغلاق القائمة المتنقلة عند النقر على رابط
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobileMenu').classList.remove('active');
+            });
+        });
+        
+        // تحريك الصفحة عند النقر على الروابط الداخلية
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // تأثيرات عند التمرير
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if(window.scrollY > 100) {
+                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+            }
+            
+            // إضافة تأثيرات للعناصر عند ظهورها
+            const elements = document.querySelectorAll('.feature-card, .product-card');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if(elementTop < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        });
+        
+        // تهيئة بعض الأنماط للعناصر
+        document.addEventListener('DOMContentLoaded', function() {
+            // تعيين تأثيرات أولية للعناصر
+            const elements = document.querySelectorAll('.feature-card, .product-card');
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            
+            // إظهار العناصر بعد تحميل الصفحة
+            setTimeout(() => {
+                elements.forEach(element => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                });
+            }, 300);
+            
+            // زر تحميل التطبيق مع تأثير مميز
+            const downloadBtn = document.getElementById('downloadBtn');
+            downloadBtn.addEventListener('click', function(e) {
+                // يمكن إضافة كود هنا لتتبع تحميل التطبيق
+                console.log('تم النقر على زر تحميل التطبيق');
+                
+                // يمكن إضافة رسالة تأكيد
+                alert('سيتم توجيهك إلى متجر جوجل بلاي لتحميل تطبيق مجزر الطيور عباد الرحمن');
+            });
+        });
+    </script>
+</body>
+</html>
