@@ -365,7 +365,11 @@
             margin-left: 8px;
             color: var(--secondary-color);
         }
-
+        
+        .footer-section ul li a {
+            color:#eee;
+        }
+        
         .copyright {
             text-align: center;
             padding-top: 1.5rem;
@@ -449,6 +453,56 @@
             .app-info {
                 flex-direction: column;
                 text-align: center;
+            }
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), #ff5722);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(198, 40, 40, 0.4);
+            transition: all 0.4s ease;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) rotate(180deg);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) rotate(0);
+        }
+        
+        .back-to-top:hover {
+            background: linear-gradient(135deg, #a71c1c, #e64a19);
+            transform: scale(1.15) rotate(360deg);
+            box-shadow: 0 8px 25px rgba(198, 40, 40, 0.5);
+        }
+        
+        .back-to-top:active {
+            transform: scale(0.95);
+        }
+        
+        /* للشاشات الصغيرة */
+        @media (max-width: 768px) {
+            .back-to-top {
+                bottom: 20px;
+                left: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -654,7 +708,9 @@
             <p>جميع الحقوق محفوظة &copy; ٢٠٢٣ مجزر الطيور عباد الرحمن</p>
         </div>
     </footer>
-    
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
     <script>
         // تفعيل القائمة المتنقلة
         document.getElementById('mobileMenuBtn').addEventListener('click', function() {
@@ -734,6 +790,25 @@
                 
                 // يمكن إضافة رسالة تأكيد
                 alert('سيتم توجيهك إلى متجر جوجل بلاي لتحميل تطبيق مجزر الطيور عباد الرحمن');
+            });
+        });
+
+        const backToTopBtn = document.getElementById('backToTop');
+
+        // إظهار/إخفاء الزر عند التمرير
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        // عند النقر على الزر
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
         });
     </script>
